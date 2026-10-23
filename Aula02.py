@@ -1,0 +1,32 @@
+import os
+
+def getDesktop():
+    user = os.environ['USERPROFILE']
+
+    candidatos = [
+        os.path.join(user, 'Onedrive - sharkcoders', 'Ambiente de Trabalho'),
+        os.path.join(user, 'Onedrive', 'Ambiente de Trabalho'),
+        os.path.join(user, 'Onedrive - sharkcoders', 'Desktop'),
+        os.path.join(user, 'Onedrive', 'Ambiente de Trabalho'),
+        os.path.join(user, 'Desktop'),
+    ]
+
+    return next ((cand for cand in candidatos if os.path.exists(cand)), user)
+
+desktop = getDesktop()
+
+print(f'Desktop: {desktop}')
+
+caminho = os.path.join(desktop, 'NovoDocumentoDeTexto.txt')
+
+with open(caminho, 'w', encoding='utf-8') as file:
+    file.write('Olá, mundo!\n')
+    file.write('Segunda linha.\n')
+    file.write('Terceira linha.\n')
+
+print(f'Ficheiro criado: {caminho}')
+
+with open(caminho, 'r', encoding='utf-8') as file:
+    conteudo = file.read()
+
+print(f'\nConteúdo do ficheiro:\n{conteudo}')
